@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model centers {
+  id             Int      @id @default(autoincrement())
+  center_name    String?  @db.VarChar(255)
+  center_tel     String?  @db.VarChar(255)
+  doctors        Int?
+  nurses         Int?
+  social_workers Int?
+  addres         String?  @db.VarChar(255)
+  center_type    String?  @db.VarChar(255)
+  region_id      Int?
+  regions        regions? @relation(fields: [region_id], references: [id], onDelete: NoAction, map: "centers_ibfk_1")
+
+  @@index([region_id], map: "region_id")
+}
+
+model managers {
+  id        Int      @id @default(autoincrement())
+  user_id   Int?
+  region_id Int?
+  users     users?   @relation(fields: [user_id], references: [id], onDelete: NoAction, map: "managers_ibfk_1")
+  regions   regions? @relation(fields: [region_id], references: [id], onDelete: NoAction, map: "managers_ibfk_2")
+
+  @@index([region_id], map: "region_id")
+  @@index([user_id], map: "user_id")
+}
+
+model regions {
+  id       Int        @id @default(autoincrement())
+  region   String?    @db.VarChar(255)
+  centers  centers[]
+  managers managers[]
+}
+
+model users {
+  id           Int        @id @default(autoincrement())
+  name         String?    @db.VarChar(255)
+  password     String?    @db.VarChar(255)
+  email        String?    @db.VarChar(255)
+  phone_number String?    @db.VarChar(255)
+  account      String?    @db.VarChar(255)
+  create_at    DateTime?  @default(now()) @db.DateTime(0)
+  update_at    DateTime?  @default(now()) @db.DateTime(0)
+  managers     managers[]
+}
