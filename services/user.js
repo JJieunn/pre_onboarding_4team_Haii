@@ -1,7 +1,7 @@
 const errors = require('../middleware/signup_errors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const { SECRET_KEY } = process.env;
 const userModels = require('../models/user');
 const { createError } = require('../middleware/createError');
 
@@ -82,8 +82,9 @@ const beforeUpdateMgr = async mgrId => {
   return await userModels.beforeUpdateMgr(mgrId);
 };
 
-const updateMgr = async (adminId, mgrId, name, phone_number, region) => {
-  const check = await userModels.adminCheck(adminId);
+const updateMgr = async (token, mgrId, name, phone_number, region) => {
+  const user_id = jwt.verify(token, SECRET_KEY).id;
+  const check = await userModels.adminCheck(user_id);
   if (check.length > 0) {
     return await userModels.updateMgr(mgrId, name, phone_number, region);
   } else {

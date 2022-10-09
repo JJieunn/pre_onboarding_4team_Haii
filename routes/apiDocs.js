@@ -12,7 +12,7 @@
  *        - application/json
  *       parameters:
  *         - in: body
- *           name: info
+ *           name: input
  *           type: string
  *           description : "name, account, email, password, phoneNumber, region"
  *           required: true
@@ -39,7 +39,7 @@
  *                example:                         
  *                  {"err": "비밀번호 길이를 확인해주세요."}
  *        '400-(3)':
- *          description: 계정(email, 전화번호) 중복 에러
+ *          description: 계정(email, account, 전화번호) 중복 에러
  *          content: 
  *             application/json:
  *              schema:
@@ -53,12 +53,33 @@
  *                example:                         
  *                  {"err": "계정을 확인해주세요."}
  *        '400-(5)':
- *          description: 비밀번호 길이 에러
+ *          description: 비밀번호 정규표현식 에러
  *          content:
  *             application/json:
  *              schema:
  *                example:                         
- *                  {"err": "비밀번호 길이를 확인해주세요."}
+ *                  {"err": "비밀번호를 확인해주세요."}
+ *        '400-(6)':
+ *          description: 전화번호 정규표현식 에러
+ *          content:
+ *             application/json:
+ *              schema:
+ *                example:                         
+ *                  {"err": "핸드폰 번호를 확인해주세요."}
+ *        '400-(7)':
+ *          description: 대표관리자 중복 에러
+ *          content:
+ *             application/json:
+ *              schema:
+ *                example:                         
+ *                  {"err": "이미 대표관리자가 존재합니다."}
+ *        '400-(8)':
+ *          description: 지역 입력 값 에러
+ *          content:
+ *             application/json:
+ *              schema:
+ *                example:                         
+ *                  {"err": "지역이 잘못 입력되었습니다."}
  * 
  * 
  *  /user/login:
@@ -81,7 +102,7 @@
  *        description: 로그인 성공
  *
  * 
- *  /user/update/:mgrId:
+ *  /user/update/{mgrId}:
  *    patch:
  *      summary: 회원 정보 수정
  *      description: 특정 회원의 정보 수정(단일 데이터를 수정할 때 사용함)
@@ -89,30 +110,24 @@
  *      - Users
  *      parameters: 
  *          - in: path
- *            name: adminId
- *            description: 대표관리자의 고유 id값
- *            type: number
- *          - in: body
  *            name: mgrId
  *            description: 수정할 회원의 고유 id값
  *            type: number
+ *          - in: header
+ *            name: token
+ *            description: token
+ *            type: string
  *          - in: body
  *            name: name
- *            description: 회원의 이름
- *            type: string
- *          - in: body
- *            name: phone_number
- *            description: 회원의 전화번호
- *            type: string
- *          - in: body
- *            name: region
- *            description: 회원의 지역
+ *            description: "name, phone_number, region"
  *            type: string
  *      required: true
  *      
  *      responses:
- *       200:
- *        description: 회원 정보 수정 (사용자가 서버로 전달하는 값에 따라 결과 값은 다릅니다.)
+ *       '200':
+ *         description: 회원 정보 수정 성공 (Update SUCCESS)
+ *       '400':
+ *         description: Admin 계정이 아닐 때, 회원 정보 수정 에러
  *        
  *
  *  /excel:
