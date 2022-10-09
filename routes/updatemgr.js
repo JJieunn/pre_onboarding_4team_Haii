@@ -46,6 +46,7 @@ const router = express.Router();
  *                      { "id": 2, "name": "유저2" },
  *                      { "id": 3, "name": "유저3" },
  *                    ]
+ * 
  */
 router.patch('/:mgrId', updateMgrController.updateMgr)
 

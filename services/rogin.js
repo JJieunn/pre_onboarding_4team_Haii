@@ -21,23 +21,4 @@ const login = async (email, password) => {
   }
 };
 
-// const login = async body => {
-//   const { email, password } = body;
-//   console.log(email, password, 'test');
-//   const users = await userModels.getUserByEmail(email);
-//   if (!users) {
-//     const error = new Error('INVALID_USER');
-//     error.statusCode = 400;
-//     throw error;
-//   }
-//   const isCorrect = await bcrypt.compare(password, users.password);
-//   if (!isCorrect) {
-//     const error = new Error('INVALID_USER');
-//     error.statusCode = 400;
-//     throw error;
-//   }
-
-//   const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY);
-//   return token;
-// };
 module.exports = { login };
