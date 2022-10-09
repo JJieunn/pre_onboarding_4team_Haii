@@ -2,9 +2,9 @@ const signUpService = require('../services/users_signup')
 
 
 const createUser = async (req, res) => {
-  const { name, account, password, phoneNumber, region } = req.body;
+  const { name, account, email, password, phoneNumber, region } = req.body;
 
-  if(!(name && account && password && phoneNumber)) {
+  if(!(name && account && email && password && phoneNumber)) {
     res.status(400).json({ err: "칸을 제대로 입력해주세요." })
   }
   
@@ -14,7 +14,7 @@ const createUser = async (req, res) => {
 
 
   try {
-    await signUpService.createUser(name, account, password, phoneNumber, region)
+    await signUpService.createUser(name, account, email, password, phoneNumber, region)
     res.status(200).json({ message: "회원가입 되었습니다." })
   } catch (err) {
     console.log(err)
