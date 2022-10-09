@@ -135,7 +135,7 @@ http://localhost:8000/api-docs/
   - 엑셀 다운로드: 
     - 받아온 데이터를 엑셀으로 다운로드. haii.xlsx 파일 위치는 해당 프로젝트 폴더 내부
     - 컬럼명을 JSON 데이터 필드명과 동일하게 맞춤
-   - 데이터 가져오기:
+  - 데이터 가져오기:
     - 필터링 세부 query문 작성
   
 <img width="1127" alt="스크린샷 2022-10-10 오전 4 22 58" src="https://user-images.githubusercontent.com/97499865/194775696-e55dde70-329c-4cdb-b4c1-9a8dc1bf6986.png">
