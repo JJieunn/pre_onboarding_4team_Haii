@@ -3,6 +3,7 @@ const usersController = require('../controllers/rogin');
 
 const router = express.Router();
 
-router.post('/login', usersController.loginController);
+// router.post('/login', usersController.loginController);
+router.post('/login', usersController.login);
 
 module.exports = router;
