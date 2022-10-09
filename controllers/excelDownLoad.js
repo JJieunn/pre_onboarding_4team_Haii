@@ -46,7 +46,7 @@ const excelDownLoadAction = async (req, res) => {
     });
 
     // 5. 다운로드 받기
-    workbook.xlsx.writeFile('Haii.xlsx');
+    workbook.xlsx.writeFile('./Haii.xlsx');
 
     return res.status(201).json({ message: 'success', data: data });
   } catch (err) {
