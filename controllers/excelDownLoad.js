@@ -40,12 +40,13 @@ const excelDownLoadAction = async (req, res) => {
       { header: '의사인원수', key: 'doctors' },
       { header: '간호사인원수', key: 'nurses' },
       { header: '사회복지사인원수', key: 'social_workers' },
+      { header: '위도', key: 'latitude' },
+      { header: '경도', key: 'longitude' },
     ];
     data.map((el, idx) => {
       sheetOne.insertRow(idx + 2, el);
     });
 
-    // 5. 다운로드 받기
     workbook.xlsx.writeFile('./Haii.xlsx');
 
     return res.status(201).json({ message: 'success', data: data });
