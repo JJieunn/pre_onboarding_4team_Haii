@@ -1,39 +1,50 @@
 const signUpModel = require('../models/users_signup')
-/* 
-대표 관리자는 모든 데이터를 읽고 쓸 수 있는 권한을 가집니다. grade = 1
-- 각 지역별 담당자는 데이터를 조회할 수 있는 권한만을 가집니다. grade = 2 
-`name` varchar(255),
-  `password` varchar(255),
-  `email` varchar(255),
-  `phone_number` varchar(255),
-  `account` varchar(255),
-  `grade` int  // 대표관리자 = 1
-
-  CREATE TABLE `managers` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `user_id` int,
-  `region_id` INT,
-
-  regions
-  id int
-  region varchar */
+const errors = require('./signup_errors')
+const bcrypt = require('bcryptjs');
 
 const createUser = async (name, account, password, phoneNumber, region) => {
-// 정규식 검사, 유효성 검사
 
-// 해당 account 가 존재하는지 검사,
+  const accountRegExp = /^[\w\-]+\@Haii.com$/g;
+  const passwordRegExp = /^[A-Za-z0-9.!?@#*+]+$/;
+  const phoneNumberRegExp = /^010-\d{4}-\d{4}$/;
+  
+  const accountValueCheck = accountRegExp.test(account)
+  if(!accountValueCheck) errors.accountError()
+  
 
-// 해당 phone_number가 존재하는지 검사,
+  const passwordValueCheck = passwordRegExp.test(password)
+  if(!passwordValueCheck) errors.passwordError()
+  
 
+  const phoneNumberValueCheck = phoneNumberRegExp.test(phoneNumber)
+  if (phoneNumberValueCheck) {
+    phoneNumber = phoneNumber.split('-').join('');
+  } else if(!phoneNumberValueCheck) errors.phoneNumberError()
+  
 
-// 해당 account나 password, phone_number가 해당 양식에 맞는가, >> 정규식 검사
+  const [userId] = await signUpModel.getUserByAccount(account);
+  const [phoneNumberId] = await signUpModel.getUserIdByPhoneNumber(phoneNumber);
+  if(userId || phoneNumberId) errors.userExistedError()
+  
 
+  if(!region) { 
+    const [representative] = await signUpModel.isRepresentativeExists()
 
-// region이 없다면, 대표 관리자가 있는지 없는지 유무에 따라서 다시 생각해볼 문제..
-
-
-return await signUpModel.createUser(name, account, password, phoneNumber, region)
-
+    if(!representative) { grade = 1; region = ''; }
+    else if (representative) errors.representativeError()  // 대표 관리자는 1명만
+  } else {
+    const [regionId] = await signUpModel.getRegionIdByName(region); // region, 테이블에 존재하는 지역?
+    
+    if(regionId) grade = 2;
+    else errors.regionError()
+  }
+  
+  
+  const salt = bcrypt.genSaltSync(11);
+  const hashedPw = bcrypt.hashSync(password, salt);
+  
+  const isUserValid = accountValueCheck && phoneNumberValueCheck && passwordValueCheck
+  if(isUserValid) return await signUpModel.createUser(name, account, hashedPw, phoneNumber, grade, region)
 }
 
 
