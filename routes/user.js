@@ -1,11 +1,15 @@
-const express = require('express')
-const updateMgrController = require('../controllers/updatemgr')
+const express = require('express');
+const usersController = require('../controllers/user');
 
 const router = express.Router();
 
+router.post('/signup', usersController.createUser);
+router.post('/login', usersController.login);
+router.patch('/update/:mgrId', usersController.updateMgr);
+
 /**
  * @swagger
- * /api/user/update/{user_id}:
+ * /user/update/{user_id}:
  *   patch:
  *    summary: "유저 수정"
  *    description: "Patch 방식을 통해 특정 유저 수정(단일 데이터를 수정할 때 사용함)"
@@ -46,8 +50,7 @@ const router = express.Router();
  *                      { "id": 2, "name": "유저2" },
  *                      { "id": 3, "name": "유저3" },
  *                    ]
- * 
+ *
  */
-router.patch('/:mgrId', updateMgrController.updateMgr)
 
 module.exports = router;
