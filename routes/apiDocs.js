@@ -6,7 +6,7 @@
  *    post:
  *      summary: 로그인
  *      tags:
- *      - Login
+ *      - Users
  *      description: email pw를 입력하로그인
  *      produces:
  *      - application/json
