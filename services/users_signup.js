@@ -17,9 +17,7 @@ const createUser = async (name, account, password, phoneNumber, region) => {
   
 
   const phoneNumberValueCheck = phoneNumberRegExp.test(phoneNumber)
-  if (phoneNumberValueCheck) {
-    phoneNumber = phoneNumber.split('-').join('');
-  } else if(!phoneNumberValueCheck) errors.phoneNumberError()
+  if(!phoneNumberValueCheck) errors.phoneNumberError()
   
 
   const [userId] = await signUpModel.getUserByAccount(account);

@@ -1,5 +1,5 @@
 const accountError = () => {
-  const err = new Error("계정 주소를 확인해주세요.")
+  const err = new Error("계정 이메일 주소를 확인해주세요.")
     err.statusCode = 400
     throw err;
 }
@@ -11,13 +11,13 @@ const passwordError = () => {
 }
 
 const phoneNumberError = () => {
-  const err = new Error("핸드폰 번호를 확인해주세요.")
+  const err = new Error("전화번호를 확인해주세요.")
   err.statusCode = 400
   throw err;
 }
 
 const userExistedError = () => {
-  const err = new Error("이미 있는 계정입니다.")
+  const err = new Error("이미 존재하는 계정입니다.")
   err.statusCode = 400
   throw err;
 }
