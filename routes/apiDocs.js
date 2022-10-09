@@ -169,7 +169,7 @@
  *                  message:
  *                    type: string
  *                    example: "you are not a representative manager"
- *        '500':
+ *        '401':
  *          description: 토큰이 없는 경우
  *          content:
  *            application/json:
