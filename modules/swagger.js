@@ -4,12 +4,14 @@ const swaggereJsdoc = require('swagger-jsdoc');
 const options = {
     swaggerDefinition: {
         info: {
-            title: 'Test API',
+            title: 'Admin용 데이터 관리 프로그램',
             version: '1.0.0',
-            description: 'Test API with express',
+            description: '회원 가입, 로그인, 회원 정보 수정, 데이터베이스 저장, 엑셀 다운로드 API with express',
         },
-        host: 'http://localhost:8000',
-        basePath: '/'
+        server: [{
+            host: 'http://localhost:8000',
+            description: 'local Server'
+        }]
     },
     apis: ['./routes/*.js', './swagger/*']
 };
