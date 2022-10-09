@@ -12,7 +12,9 @@ const excelDownLoadActionWithFiltering = async params => {
   centers.addres,
   centers.center_type,
   centers.operating_institution_name,
-  centers.operating_institution_rep
+  centers.operating_institution_rep,
+  centers.latitude,
+  centers.longitude
   FROM centers
   LEFT JOIN regions ON regions.id = centers.region_id
   LEFT JOIN managers ON managers.region_id = regions.id
@@ -42,7 +44,9 @@ const excelDownLoadAction = async user_id => {
   centers.addres,
   centers.center_type,
   centers.operating_institution_name,
-  centers.operating_institution_rep
+  centers.operating_institution_rep,
+  centers.latitude,
+  centers.longitude
   FROM centers
   LEFT JOIN regions ON regions.id = centers.region_id
   LEFT JOIN managers ON managers.region_id = regions.id
