@@ -1,11 +1,30 @@
-const excelDownLoadDao = require("../models/excelDownLoad");
+const excelDownLoadDao = require('../models/excelDownLoad');
 const jwt = require('jsonwebtoken');
 
-const excelDownLoadAction = async (params) => {
-  // const user_id = jwt.verify(token, 'secretKey').id;
-  // 사용자 아이디 시크릿키값 뭔지 알아야 함
+const excelDownLoadAction = async params => {
+  // const user_id = jwt.verify(token, 'SecretKey').id;
+  // params[user_id] = user_id;
+  if (
+    !(
+      params.operating_institution_tel ||
+      params.operating_institution_rep ||
+      params.center_name ||
+      params.doctors ||
+      params.nurses ||
+      params.social_workers ||
+      params.center_type
+    )
+  ) {
+    const excelData = await excelDownLoadDao.excelDownLoadAction(
+      params.user_id
+    );
+    return excelData;
+  } else {
+    const excelData = await excelDownLoadDao.excelDownLoadActionWithFiltering(
+      params
+    );
+    return excelData;
+  }
+};
 
-  return await excelDownLoadDao.excelDownLoadAction(params);
-}
-
-module.exports = { excelDownLoadAction }
+module.exports = { excelDownLoadAction };
