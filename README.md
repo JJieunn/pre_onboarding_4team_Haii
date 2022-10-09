@@ -234,9 +234,9 @@ http://localhost:8000/api-docs/
    - 응답 코드
       - 성공(200) 
         - message: data parsing success
-      - 권한없음(400) 
+      - 권한 없음(400) 
         - message: you are not a representative manager
-      - 토큰이없을때(500) 
+      - 토큰이 없을때(401) 
         - message: jwt must be provided
         
    - 구현 설명
