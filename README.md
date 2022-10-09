@@ -129,7 +129,7 @@ http://localhost:8000/api-docs/
 - 김 현정 - 엑셀 다운로드 기능
   - 데이터 가져오기: 
     - 헤더로 token을 받아와서 복호화 후 user_id를 가져오기
-    - 해당 user_id와 query로 받아온 각종 parameter들을 사용해 데이터 추출을 위해 query문 작성
+    - 해당 user_id와 query로 받아온 각종 parameter들을 사용해 데이터 추출을 위한 query문 작성
     
 - 안 수철 - 엑셀 다운로드 기능
   - 엑셀 다운로드: 
