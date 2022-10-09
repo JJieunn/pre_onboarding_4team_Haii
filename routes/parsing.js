@@ -3,6 +3,6 @@ const parsingController = require('../controllers/parsing');
 
 const router = express.Router();
 
-router.post('/parsing', parsingController.parsing);
+router.post('', parsingController.parsingDatas);
 
 module.exports = router;

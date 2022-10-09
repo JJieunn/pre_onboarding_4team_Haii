@@ -1,6 +1,11 @@
 const { PrismaClient, Prisma } = require('@Prisma/client');
 const prisma = new PrismaClient();
 
+const checkGrade = async(user_id) => {
+  return await prisma.$queryRaw
+  `SELECT grade from users WHERE id = ${user_id}`
+}
+
 const inputRegionData = async(regionArr) => {
   return await prisma.$queryRaw
   `
@@ -46,4 +51,4 @@ const inputCenterData = async(
 
 
 
-module.exports = { inputCenterData, inputRegionData }
+module.exports = { inputCenterData, inputRegionData, checkGrade }
