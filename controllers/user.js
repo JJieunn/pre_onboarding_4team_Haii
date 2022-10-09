@@ -3,7 +3,7 @@ const userService = require('../services/user');
 const createUser = async (req, res) => {
   const { name, account, email, password, phoneNumber, region } = req.body;
 
-  if (!(name && account && email && password && phoneNumber)) {
+  if (!(name && account && email && password && phoneNumber && region)) {
     res.status(400).json({ err: '칸을 제대로 입력해주세요.' });
   }
 
@@ -39,20 +39,24 @@ const login = async (req, res) => {
 };
 
 const updateMgr = async (req, res) => {
-  const adminId = req.params.adminId;
-  const { mgrId, name, phone_number, region } = req.body;
+  const { token } = req.headers; 
+  const mgrId = req.params.mgrId;
+  const { name, phone_number, region } = req.body;
+  const resArray = {};
   try {
     const Before_update = await userService.beforeUpdateMgr(mgrId);
     const After_update = await userService.updateMgr(
-      adminId,
+      token,
       mgrId,
       name,
       phone_number,
       region
     );
+    resArray.Before_update = Before_update
+    resArray.After_update = After_update
     res
       .status(200)
-      .json({ message: 'Update SUCCESS', Before_update, After_update });
+      .json({ message: 'Update SUCCESS', resArray });
   } catch (err) {
     console.log(err);
     res.status(err.status || 500).json(err.message);
