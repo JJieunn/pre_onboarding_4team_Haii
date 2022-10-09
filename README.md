@@ -119,15 +119,28 @@ http://localhost:8000/api-docs/
     
 
 
-- 안 수철 - 엑셀 다운로드 기능(선택 구현)
+
    
 
 - 이 해연 - 회원 정보 수정 기능
    
 
 
-- 김 현정 - 엑셀 다운로드 기능(필수 구현)
+- 김 현정 - 엑셀 다운로드 기능
+  - 데이터 가져오기: 
+    - 헤더로 token을 받아와서 복호화 후 user_id를 가져오기
+    - 해당 user_id와 query로 받아온 각종 parameter들을 사용해 데이터 추출을 위해 query문 작성
+    
+- 안 수철 - 엑셀 다운로드 기능
+  - 엑셀 다운로드: 
+    - 받아온 데이터를 엑셀으로 다운로드. haii.xlsx 파일 위치는 해당 프로젝트 폴더 내부
+    - 컬럼명을 JSON 데이터 필드명과 동일하게 맞춤
+   - 데이터 가져오기:
+    - 필터링 세부 query문 작성
+  
+<img width="1127" alt="스크린샷 2022-10-10 오전 4 22 58" src="https://user-images.githubusercontent.com/97499865/194775696-e55dde70-329c-4cdb-b4c1-9a8dc1bf6986.png">
 
+<img width="1136" alt="스크린샷 2022-10-10 오전 4 11 38" src="https://user-images.githubusercontent.com/97499865/194775278-b200d6ab-4017-44cb-b3ed-eae45d11fc3d.png">
 
 
 
