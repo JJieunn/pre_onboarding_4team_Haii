@@ -24,7 +24,6 @@ const excelDownLoadAction = async (req, res) => {
       social_workers,
       center_type,
     };
-    console.log(params);
 
     const data = await excelDownLoadService.excelDownLoadAction(params);
 

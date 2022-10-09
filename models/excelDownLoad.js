@@ -62,7 +62,6 @@ const excelDownLoadAction = async params => {
   ${nursesFilter}
   ${socialWorkersFilter}
   `;
-  console.log(query);
   const data = await prisma.$queryRaw`${query}`;
 
   return data;
