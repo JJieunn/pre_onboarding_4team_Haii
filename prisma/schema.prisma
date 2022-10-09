@@ -17,6 +17,8 @@ model centers {
   addres         String?  @db.VarChar(255)
   center_type    String?  @db.VarChar(255)
   region_id      Int?
+  latitude       Decimal  @unique(map: "latitude") @db.Decimal(15, 12)
+  longitude      Decimal  @unique(map: "longitude") @db.Decimal(15, 12)
   regions        regions? @relation(fields: [region_id], references: [id], onDelete: NoAction, map: "centers_ibfk_1")
 
   @@index([region_id], map: "region_id")
