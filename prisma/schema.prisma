@@ -8,16 +8,20 @@ datasource db {
 }
 
 model centers {
-  id             Int      @id @default(autoincrement())
-  center_name    String?  @db.VarChar(255)
-  center_tel     String?  @db.VarChar(255)
-  doctors        Int?
-  nurses         Int?
-  social_workers Int?
-  addres         String?  @db.VarChar(255)
-  center_type    String?  @db.VarChar(255)
-  region_id      Int?
-  regions        regions? @relation(fields: [region_id], references: [id], onDelete: NoAction, map: "centers_ibfk_1")
+  id                         Int      @id @default(autoincrement())
+  center_name                String?  @db.VarChar(255)
+  operating_institution_tel  String?  @db.VarChar(255)
+  doctors                    Int?
+  nurses                     Int?
+  social_workers             Int?
+  address                    String?  @db.VarChar(255)
+  center_type                String?  @db.VarChar(255)
+  region_id                  Int?
+  operating_institution_name String?  @db.VarChar(200)
+  operating_institution_rep  String?  @db.VarChar(200)
+  latitude                   Decimal  @unique(map: "latitude") @db.Decimal(15, 12)
+  longitude                  Decimal  @unique(map: "longitude") @db.Decimal(15, 12)
+  regions                    regions? @relation(fields: [region_id], references: [id], onDelete: NoAction, map: "centers_ibfk_1")
 
   @@index([region_id], map: "region_id")
 }
@@ -35,7 +39,7 @@ model managers {
 
 model regions {
   id       Int        @id @default(autoincrement())
-  region   String?    @db.VarChar(255)
+  region   String?    @unique(map: "region_UNIQUE") @db.VarChar(255)
   centers  centers[]
   managers managers[]
 }
