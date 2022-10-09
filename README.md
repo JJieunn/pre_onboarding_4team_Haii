@@ -131,10 +131,10 @@ http://localhost:8000/api-docs/
 
 
 
-- 최 정훈 - 로그인 기능
-  - user/login 명세서의 try it out을 클릭 후 body값에 아래의 값을 넣어 Execute 진행
-      - 로그인 기능 설명
-      - test
+- 최 정훈 - 로그인 기능 및 Swagger init
+   - 로그인 기능 설명 : Jsonwebtoken, Bcrypt을 이용하여 token 발행하는 로그인API구현
+
+      - user/login 명세서의 try it out을 클릭 후 body값에 아래의 값을 넣어 Execute 진행
 ```
 {
     "email":"aaa123@Haii.com", 
