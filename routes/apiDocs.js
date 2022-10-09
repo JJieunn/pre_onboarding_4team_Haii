@@ -81,7 +81,7 @@
  *      produces:
  *      - application/json
  *      parameters:
- *        - in: headers
+ *        - in: header
  *          name: token
  *          required: true
  *          type: string
@@ -92,10 +92,10 @@
  *          type: string
  *          description : 운영기관전화번호
  *        - in: query
- *          name: operating_institution_name
+ *          name: operating_institution_rep
  *          required: false
  *          type: string
- *          description : 운영기관명
+ *          description : 운영기관대표자명
  *        - in: query
  *          name: center_name
  *          required: false
