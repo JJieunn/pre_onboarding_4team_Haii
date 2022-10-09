@@ -1,5 +1,5 @@
-const accountError = () => {
-  const err = new Error("계정 이메일 주소를 확인해주세요.")
+const emailError = () => {
+  const err = new Error("이메일 주소를 확인해주세요.")
     err.statusCode = 400
     throw err;
 }
@@ -35,7 +35,7 @@ const representativeError = () => {
 }
 
 module.exports = {
-  accountError,
+  emailError,
   passwordError,
   phoneNumberError,
   userExistedError,

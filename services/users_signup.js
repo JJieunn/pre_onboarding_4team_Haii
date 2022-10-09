@@ -2,14 +2,14 @@ const signUpModel = require('../models/users_signup')
 const errors = require('./signup_errors')
 const bcrypt = require('bcryptjs');
 
-const createUser = async (name, account, password, phoneNumber, region) => {
+const createUser = async (name, account, email, password, phoneNumber, region) => {
 
-  const accountRegExp = /^[\w\-]+\@Haii.com$/g;
+  const emailRegExp = /^[\w\-]+\@Haii.com$/g;
   const passwordRegExp = /^[A-Za-z0-9.!?@#*+]+$/;
   const phoneNumberRegExp = /^010-\d{4}-\d{4}$/;
   
-  const accountValueCheck = accountRegExp.test(account)
-  if(!accountValueCheck) errors.accountError()
+  const emailValueCheck = emailRegExp.test(email)
+  if(!emailValueCheck) errors.emailError()
   
 
   const passwordValueCheck = passwordRegExp.test(password)
@@ -19,16 +19,16 @@ const createUser = async (name, account, password, phoneNumber, region) => {
   const phoneNumberValueCheck = phoneNumberRegExp.test(phoneNumber)
   if(!phoneNumberValueCheck) errors.phoneNumberError()
   
-
-  const [userId] = await signUpModel.getUserByAccount(account);
+  const [userAccount] = await signUpModel.getUserByAccount(account);
+  const [userEmail] = await signUpModel.getUserByEmail(email);
   const [phoneNumberId] = await signUpModel.getUserIdByPhoneNumber(phoneNumber);
-  if(userId || phoneNumberId) errors.userExistedError()
+  if(userAccount || userEmail || phoneNumberId) errors.userExistedError()
   
 
-  if(!region) { 
+  if(region === "대표") { 
     const [representative] = await signUpModel.isRepresentativeExists()
 
-    if(!representative) { grade = 1; region = ''; }
+    if(!representative) grade = 1;
     else if (representative) errors.representativeError()  // 대표 관리자는 1명만
   } else {
     const [regionId] = await signUpModel.getRegionIdByName(region); // region, 테이블에 존재하는 지역?
@@ -41,8 +41,8 @@ const createUser = async (name, account, password, phoneNumber, region) => {
   const salt = bcrypt.genSaltSync(11);
   const hashedPw = bcrypt.hashSync(password, salt);
   
-  const isUserValid = accountValueCheck && phoneNumberValueCheck && passwordValueCheck
-  if(isUserValid) return await signUpModel.createUser(name, account, hashedPw, phoneNumber, grade, region)
+  const isUserValid = emailValueCheck && phoneNumberValueCheck && passwordValueCheck
+  if(isUserValid) return await signUpModel.createUser(name, account, email, hashedPw, phoneNumber, grade, region)
 }
 
 
