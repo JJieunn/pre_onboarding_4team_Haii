@@ -162,6 +162,7 @@ http://localhost:8000/api-docs/
         
    - 구현 설명
      
+     - 지역별 관리자를 구분하기 위해 users table에 region을 참조받게 모델링 했습니다.
      - 권한을 확인하기 위해 users table에 token에서 유저의 고유 id로 grade를 확인하는 기능을 사용 했습니다.
      - 반복 요청시 이미 존재하는 데이터가 저장되지 않게 하기 위해 INSERT IGNORE을 사용 했습니다.
        - regions table의 region과 centers table의 latitude, longitude를 unique로 처리해 관리 했습니다.
