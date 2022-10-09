@@ -2,7 +2,7 @@ const excelDownLoadService = require('../services/excelDownLoad');
 const Excel = require('exceljs');
 
 const excelDownLoadAction = async (req, res) => {
-  const { token, user_id } = req.headers;
+  const { token } = req.headers;
   const {
     operating_institution_tel,
     operating_institution_rep,
@@ -15,7 +15,6 @@ const excelDownLoadAction = async (req, res) => {
 
   try {
     const params = {
-      user_id,
       token,
       operating_institution_tel,
       operating_institution_rep,
