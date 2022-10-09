@@ -145,6 +145,35 @@ http://localhost:8000/api-docs/
 
 
 - 안 상현 - JSON 데이터 파싱 후, 데이터베이스 저장
+   - 기능 설명 : json데이터를 사용 데이터베이스에 맞게 파싱한 후 데이터 베이스 전송 API 구현
+   - 데이터 저장을 위해 치매센터가 저장되어 있는 json파일이 필요합니다.
+   
+      - parsing 명세서의 try it out을 클릭 후 발급받은 token을 넣어 테스트
+![스크린샷 2022-10-10 오전 1 51 29](https://user-images.githubusercontent.com/99232122/194769457-cd9ac11a-fcda-4343-bf8b-9e9015c99df3.png)
+
+   - 응답 코드
+      - 성공(200) 
+        - message: data parsing success
+      - 권한없음(400) 
+        - message: you are not a representative manager
+      - 토큰이없을때(500) 
+        - message: jwt must be provided
+        
+   - 구현 설명
+     
+     - 권한을 확인하기 위해 users table에 token에서 유저의 고유 id로 grade를 확인하는 기능을 사용 했습니다.
+     - 반복 요청시 이미 존재하는 데이터가 저장되지 않게 하기 위해 INSERT IGNORE을 사용 했습니다.
+       - regions table의 region과 centers table의 latitude, longitude를 unique로 처리해 관리 했습니다.
+     - 권한이 없는 token으로 요청이 들어올 경우 데이터에 접근하기 전 에러를 반환했습니다.
+ 
+   - 기능 구현 시 어려웠던 점과 그에 대한 해결 방안을 모색하기 위해 노력한 점
+     
+     - node.js를 사용한 경험이 부족해 전체적으로 어려웠습니다. 프로젝트의 구조부터 이해하려 했고 구현하는 중에도 javascript의 기본 문법을 찾아보며 구현 했습니다.
+     - 데이터 파싱이라는 단어가 생소하여 파싱이 무엇인지 부터 찾아보았습니다.
+     - 처음 기능을 기획할때는 json파일을 직접 파싱하는게 아닌 openAPI를 사용해 구현하려고 했지만 openAPI가 승인되지 않아 json파일을 직접 파싱하는 방법을 사용하게 되었습니다.
+     - 같은 데이터로 반복 요청시 중복된 데이터저장을 방지하는 로직을 구현하기 위해 테이블 데이터와 비교하는 방법을 생각했지만 검색중 INSERT IGNORE기능을 알게되어 사용해 보았습니다.
+     - 토큰에서 받아온 사용자의 고유 아이디로 권한을 확인하는 과정이 어려웠습니다. 팀원에게 도움을 받아 권한을 확인하는 함수를 작성해 해결했습니다.
+     - sql문을 사용해본 경험이 적어 기본적인 문법부터 검색해 사용했습니다.
    
 
 
