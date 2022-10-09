@@ -149,6 +149,7 @@ http://localhost:8000/api-docs/
    - 데이터 저장을 위해 치매센터가 저장되어 있는 json파일이 필요합니다.
    
       - parsing 명세서의 try it out을 클릭 후 발급받은 token을 넣어 테스트
+      - region값이 "대표"인 유저의 토큰이 대표관리자의 토큰입니다.
 ![스크린샷 2022-10-10 오전 1 51 29](https://user-images.githubusercontent.com/99232122/194769457-cd9ac11a-fcda-4343-bf8b-9e9015c99df3.png)
 
    - 응답 코드
