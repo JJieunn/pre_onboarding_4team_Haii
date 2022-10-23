@@ -63,6 +63,12 @@
 
 <br />
 
+
+### 📍 DB 모델링
+<img width="958" alt="스크린샷 2022-10-09 오후 10 17 01" src="https://user-images.githubusercontent.com/68211978/194759127-654beda6-cd2f-45c3-85c1-652d6870ddb0.png">
+
+<br />
+
 ## 📍 실행 방법
 
 ### Step 1. 레포지토리 clone
@@ -114,18 +120,6 @@ npm start
 
 <br />
 
-## 📍 Swagger API
-### Swagger 명세서 확인 방법
-```
-npm start
-http://localhost:8000/api-docs/
-```
-
-### 📍 DB 모델링
-<img width="958" alt="스크린샷 2022-10-09 오후 10 17 01" src="https://user-images.githubusercontent.com/68211978/194759127-654beda6-cd2f-45c3-85c1-652d6870ddb0.png">
-
-<br />
-
 ## 📍 프로젝트 구조
 - MVC pattern에 Services를 추가한 Layered achitecture로 routes - controllers - services - models 
 ```
@@ -162,6 +156,15 @@ http://localhost:8000/api-docs/
  ┣ 📜package.json
  ┣ 📜center_data.json
  ┗ 📜server.js
+```
+
+<br />
+
+## 📍 Swagger API
+### Swagger 명세서 확인 방법
+```
+npm start
+http://localhost:8000/api-docs/
 ```
 
 <br />
